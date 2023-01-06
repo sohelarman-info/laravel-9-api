@@ -20,4 +20,5 @@ use App\Http\Controllers\{
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// get api route
 Route::get('/users/{id?}', [UserApiController::class, 'ShowUser'])->name('ShowUser');
