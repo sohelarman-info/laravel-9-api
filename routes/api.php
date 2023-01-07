@@ -26,5 +26,7 @@ Route::get('/users/{id?}', [UserApiController::class, 'ShowUser'])->name('ShowUs
 Route::post('/add-user', [UserApiController::class, 'AddUser'])->name('AddUser');
 // post api route (multiple user)
 Route::post('/add-multiple-user', [UserApiController::class, 'AddMultipleUser'])->name('AddMultipleUser');
+// put api route (update user)
+Route::put('/update-user/details/{id}', [UserApiController::class, 'updateUserDetails'])->name('updateUserDetails');
 
 
