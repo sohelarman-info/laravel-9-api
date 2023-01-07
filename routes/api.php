@@ -28,5 +28,7 @@ Route::post('/add-user', [UserApiController::class, 'AddUser'])->name('AddUser')
 Route::post('/add-multiple-user', [UserApiController::class, 'AddMultipleUser'])->name('AddMultipleUser');
 // put api route (update user)
 Route::put('/update-user/details/{id}', [UserApiController::class, 'updateUserDetails'])->name('updateUserDetails');
+// patch api route (update user for signle item)
+Route::patch('/update-single-record/{id?}', [UserApiController::class, 'updateSingleRecord'])->name('updateSingleRecord');
 
 

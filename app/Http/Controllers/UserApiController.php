@@ -97,36 +97,64 @@ class UserApiController extends Controller
         }
     }
 
-        // Put API for update user details
-        public function updateUserDetails(Request $request, $id){
-            if($request->ismethod('put')){
-                $data = $request->all();
-                // return $data;
+    // Put API for update user details
+    public function updateUserDetails(Request $request, $id){
+        if($request->ismethod('put')){
+            $data = $request->all();
+            // return $data;
 
-                $rules = [
-                    'name'      => 'required',
-                    'password'  => 'required',
-                ];
+            $rules = [
+                'name'      => 'required',
+                'password'  => 'required',
+            ];
 
-                $customMessage = [
-                    'name.required' => 'Name is required',
-                    'password.required' => 'Password is required',
-                ];
+            $customMessage = [
+                'name.required' => 'Name is required',
+                'password.required' => 'Password is required',
+            ];
 
-                $validator = Validator::make($data, $rules, $customMessage);
-                if($validator->fails()){
-                    return response()->json($validator->errors(), 422);
-                }
-
-                $user = User::findOrFail($id);
-                $user->name = $data['name'];
-                $user->password = bcrypt($data['password']);
-                $user->save();
-                $message = 'User update successfully done!';
-                return response()->json(['message'=>$message],202);
-
+            $validator = Validator::make($data, $rules, $customMessage);
+            if($validator->fails()){
+                return response()->json($validator->errors(), 422);
             }
+
+            $user = User::findOrFail($id);
+            $user->name = $data['name'];
+            $user->password = bcrypt($data['password']);
+            $user->save();
+            $message = 'User update successfully done!';
+            return response()->json(['message'=>$message],202);
+
         }
+    }
+
+    // Patch API for update single user record
+    public function updateSingleRecord(Request $request, $id){
+        if($request->ismethod('patch')){
+            $data = $request->all();
+            // return $data;
+
+            $rules = [
+                'name'      => 'required',
+            ];
+
+            $customMessage = [
+                'name.required' => 'Name is required',
+            ];
+
+            $validator = Validator::make($data, $rules, $customMessage);
+            if($validator->fails()){
+                return response()->json($validator->errors(), 422);
+            }
+
+            $user = User::findOrFail($id);
+            $user->name = $data['name'];
+            $user->save();
+            $message = 'User update successfully done!';
+            return response()->json(['message'=>$message],202);
+
+        }
+    }
 
 
 }
