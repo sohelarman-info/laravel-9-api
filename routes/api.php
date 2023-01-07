@@ -30,5 +30,9 @@ Route::post('/add-multiple-user', [UserApiController::class, 'AddMultipleUser'])
 Route::put('/update-user/details/{id}', [UserApiController::class, 'updateUserDetails'])->name('updateUserDetails');
 // patch api route (update user for signle item)
 Route::patch('/update-single-record/{id?}', [UserApiController::class, 'updateSingleRecord'])->name('updateSingleRecord');
+// delete api route (delete user for signle item)
+Route::delete('/delete-user/{id?}', [UserApiController::class, 'deleteUser'])->name('deleteUser');
+// delete api route (delete user for signle item with json)
+Route::delete('/delete-user-json', [UserApiController::class, 'deleteUserJson'])->name('deleteUserJson');
 
 
