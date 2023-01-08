@@ -183,4 +183,35 @@ class UserApiController extends Controller
 
     }
 
+    // delete multiple user with json
+    public function deleteMultipleUserJson(Request $request){
+        if($request->isMethod('delete')){
+            $data = $request->all();
+            User::whereIn('id', $data['ids'])->delete();
+            $message = 'Multiple user deleted succesfully with json';
+            return response()->json(['message'=>$message],200);
+        }
+    }
+
+    //Secure data delete multiple user with json (JWT)
+    public function deleteMultipleUserSecure(Request $request){
+        $header = $request->header('Authorization'); // "Authorization" is postman key
+        if($header == ''){
+            $message = 'Authorization is required';
+            return response()->json(['message' => $message], 422);
+        }else{
+            if($header == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNvaGVsIEFybWFuIiwiaWF0IjoxNTE2MjM5MDIyfQ.ennG-g1TUY4BfU74A342Giv76kOlHVwEz25sYjXn108"){
+                if($request->isMethod('delete')){
+                    $data = $request->all();
+                    User::whereIn('id', $data['ids'])->delete();
+                    $message = 'Multiple user deleted succesfully with json';
+                    return response()->json(['message'=>$message],200);
+                }
+            }else{
+                $message = 'Authorization token does not match';
+                return response()->json(['message' => $message], 422);
+            }
+        }
+    }
+
 }

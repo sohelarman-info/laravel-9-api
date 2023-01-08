@@ -36,5 +36,9 @@ Route::delete('/delete-user/{id?}', [UserApiController::class, 'deleteUser'])->n
 Route::delete('/delete-user-json', [UserApiController::class, 'deleteUserJson'])->name('deleteUserJson');
 // delete api route (delete multiple user)
 Route::delete('/delete-multiple-user/{ids}', [UserApiController::class, 'deleteMultipleUser'])->name('deleteMultipleUser');
+// delete api route (delete user for multiple item with json)
+Route::delete('/delete-multiple-user-json', [UserApiController::class, 'deleteMultipleUserJson'])->name('deleteMultipleUserJson');
+// delete api route (Secure data delete user for multiple item with json - JWT)
+Route::delete('/delete-multiple-user-secure', [UserApiController::class, 'deleteMultipleUserSecure'])->name('deleteMultipleUserSecure');
 
 
