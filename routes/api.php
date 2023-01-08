@@ -34,5 +34,7 @@ Route::patch('/update-single-record/{id?}', [UserApiController::class, 'updateSi
 Route::delete('/delete-user/{id?}', [UserApiController::class, 'deleteUser'])->name('deleteUser');
 // delete api route (delete user for signle item with json)
 Route::delete('/delete-user-json', [UserApiController::class, 'deleteUserJson'])->name('deleteUserJson');
+// delete api route (delete multiple user)
+Route::delete('/delete-multiple-user/{ids}', [UserApiController::class, 'deleteMultipleUser'])->name('deleteMultipleUser');
 
 

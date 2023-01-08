@@ -52,7 +52,7 @@ class UserApiController extends Controller
             $user->email = $data['email'];
             $user->password = bcrypt($data['password']);
             $user->save();
-            $message = 'User added successfully done!';
+            $message = 'User added succesfully done!';
             return response()->json(['message'=>$message],201);
 
         }
@@ -89,7 +89,7 @@ class UserApiController extends Controller
                 $user->email = $addUser['email'];
                 $user->password = bcrypt($addUser['password']);
                 $user->save();
-                $message = 'User added successfully done!';
+                $message = 'User added succesfully done!';
             }
 
             return response()->json(['message'=>$message],201);
@@ -122,7 +122,7 @@ class UserApiController extends Controller
             $user->name = $data['name'];
             $user->password = bcrypt($data['password']);
             $user->save();
-            $message = 'User update successfully done!';
+            $message = 'User update succesfully done!';
             return response()->json(['message'=>$message],202);
 
         }
@@ -150,7 +150,7 @@ class UserApiController extends Controller
             $user = User::findOrFail($id);
             $user->name = $data['name'];
             $user->save();
-            $message = 'User update successfully done!';
+            $message = 'User update succesfully done!';
             return response()->json(['message'=>$message],202);
 
         }
@@ -159,7 +159,7 @@ class UserApiController extends Controller
     // delete api (single user delete)
     public function deleteUser($id=null){
         User::findOrFail($id)->delete();
-        $message = 'User successfully Deleted';
+        $message = 'User succesfully Deleted';
         return response()->json(['message'=>$message],200);
     }
 
@@ -168,9 +168,18 @@ class UserApiController extends Controller
         if($request->isMethod('delete')){
             $data = $request->all();
             User::where('id', $data['id'])->delete();
-            $message = 'User successfully Deleted with json';
+            $message = 'User succesfully Deleted with json';
             return response()->json(['message'=>$message],200);
         }
+
+    }
+
+    // delete multiple user
+    public function deleteMultipleUser($ids){
+        $ids = explode(',', $ids);
+        User::whereIn('id', $ids)->delete();
+        $message = 'Multiple user deleted succesfully';
+        return response()->json(['message'=>$message],200);
 
     }
 
